@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<!-- Bella：vue-elementui的下拉框，点击选项后不能将选项回写，特此修复 -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vue下拉菜单修复版</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+    <!-- element引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- element引入样式引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+            <span>{{selectedText}}</span><i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item :command='index' v-for="(x,index) in shuju">{{x.name}}</el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
+    </div>
+    <script>
+        var demo = new Vue({
+            el: '#main',
+            data: {
+                shuju: [{
+                    name: "孙",
+                }, {
+                    name: "猪",
+                }, {
+                    name: "沙",
+                }],
+                selectedText: '下拉菜单'
+            },
+            methods: {
+                handleCommand(command) {
+                    this.selectedText = this.shuju[command].name;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
